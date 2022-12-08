@@ -536,14 +536,16 @@ class SoundPTB(_SoundBase):
         """Stop the sound but play will continue from here if needed
         """
         self.status = PAUSED
-        self.track.stop()
+        if self.track:
+            self.track.stop()
 
     def stop(self, reset=True, log=True):
         """Stop the sound and return to beginning
         """
         if self.status == FINISHED:
             return
-        self.track.stop()
+        if self.track:
+            self.track.stop()
         if reset:
             self.seek(0)
         if log and self.autoLog:
